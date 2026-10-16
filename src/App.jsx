@@ -1,11 +1,26 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 function App() {
   // texte dans le cham
   const [newTask, setNewTask] = useState('');
 
   // tâches, vide au départ
-  const [tasks, setTasks] = useState([]);
+  // récupérer les tâches sauvegardées s'il y en a
+  const [tasks, setTasks] = useState(() => {
+    try {
+      const savedTasks = localStorage.getItem('tasks');
+      const parsedTasks = savedTasks ? JSON.parse(savedTasks) : [];
+
+      return Array.isArray(parsedTasks) ? parsedTasks : [];
+    } catch {
+      return [];
+    }
+  });
+
+  // sauvegarder les tâches à chaque modification
+  useEffect(() => {
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+  }, [tasks]);
 
   function addTask(event) {
     // empêcher le formulaire de recharger la page
