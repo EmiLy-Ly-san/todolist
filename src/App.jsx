@@ -1,14 +1,14 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
 function App() {
   // texte dans le cham
-  const [newTask, setNewTask] = useState('');
+  const [newTask, setNewTask] = useState("");
 
   // tâches, vide au départ
   // récupérer les tâches sauvegardées s'il y en a
   const [tasks, setTasks] = useState(() => {
     try {
-      const savedTasks = localStorage.getItem('tasks');
+      const savedTasks = localStorage.getItem("tasks");
       const parsedTasks = savedTasks ? JSON.parse(savedTasks) : [];
 
       return Array.isArray(parsedTasks) ? parsedTasks : [];
@@ -19,7 +19,7 @@ function App() {
 
   // sauvegarder les tâches à chaque modification
   useEffect(() => {
-    localStorage.setItem('tasks', JSON.stringify(tasks));
+    localStorage.setItem("tasks", JSON.stringify(tasks));
   }, [tasks]);
 
   function addTask(event) {
@@ -38,7 +38,7 @@ function App() {
     };
 
     setTasks([...tasks, task]);
-    setNewTask('');
+    setNewTask("");
   }
 
   function toggleTask(id) {
@@ -86,7 +86,7 @@ function App() {
 
               <span
                 style={{
-                  textDecoration: task.done ? 'line-through' : 'none',
+                  textDecoration: task.done ? "line-through" : "none",
                 }}
               >
                 {task.text}
