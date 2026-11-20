@@ -1,0 +1,34 @@
+name: CI
+
+# lancer le pipeline à chaque push et chaque pull request
+on:
+  push:
+  pull_request:
+
+jobs:
+  verification:
+    # utiliser une machine Linux fournie par GitHub
+    runs-on: ubuntu-latest
+
+    steps:
+      # récupérer les fichiers du dépôt
+      - name: Récupérer le code
+        uses: actions/checkout@v4
+
+      # installer Node.js
+      - name: Installer Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      # installer les dépendances du projet
+      - name: Installer les dépendances
+        run: npm install
+
+      # vérifier le code avec ESLint
+      - name: Lancer le linter
+        run: npm run lint
+
+      # exécuter les tests une seule fois, puis terminer
+      - name: Lancer les tests
+        run: npx vitest run
