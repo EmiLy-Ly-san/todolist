@@ -57,7 +57,7 @@ function App() {
 
   return (
     <main>
-      <h1>Ma liste de tâches</h1>
+      <h1>Ma To-do list en ligne</h1>
 
       <form onSubmit={addTask}>
         <label htmlFor="new-task">Nouvelle tâche : </label>
