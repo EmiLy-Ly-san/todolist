@@ -38,7 +38,7 @@ function App() {
     };
 
     setTasks([...tasks, task]);
-    setNewTask('');
+    setNewTask('bug');
   }
 
   function toggleTask(id) {
